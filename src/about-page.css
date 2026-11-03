@@ -1,0 +1,112 @@
+  /* Halaman About sendiri.
+    Gaya dasarnya (putih, judul Codec Cold, hijau Anargya, navbar, footer, tombol)
+    sudah dari sections.css lewat class .sections, jadi di sini cuma tata letak. */
+
+  .apage {
+    padding-top: 96px; /* ruang untuk navbar yang menempel di atas */
+    min-height: 100vh;
+  }
+
+  /* ---------- pembuka ---------- */
+
+  .apage-hero {
+    padding: clamp(48px, 7vw, 110px) 0 clamp(48px, 6vw, 90px);
+  }
+
+  .apage-lead {
+    max-width: 34ch;
+    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  /* ---------- siapa kami ---------- */
+
+  .apage-who {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(28px, 6vw, 96px);
+    padding: clamp(48px, 7vw, 100px) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 40px 0 0;
+  }
+
+  .facts div {
+    padding-top: 16px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .facts dt {
+    color: var(--muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .facts dd {
+    margin: 6px 0 0;
+    font-weight: 800;
+  }
+
+  /* ---------- sejarah: tahun besar di kiri, cerita di kanan ---------- */
+
+  .apage-history {
+    padding: clamp(48px, 7vw, 100px) 0 clamp(64px, 8vw, 120px);
+    border-top: 1px solid var(--line);
+  }
+
+  .hist {
+    margin-top: clamp(32px, 4vw, 56px);
+  }
+
+  .hist-row {
+    display: grid;
+    grid-template-columns: clamp(110px, 18vw, 260px) 1fr;
+    gap: clamp(16px, 4vw, 64px);
+    padding: 28px 0 36px;
+    border-top: 2px solid var(--ink);
+  }
+
+.hist-year {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 5.5vw, 4.6rem);
+  line-height: 1;
+  -webkit-text-stroke: 0;
+}
+
+  .hist-row.hl .hist-year {
+    color: #0a9a41;
+  }
+
+  .hist-body h3 {
+    margin: 12px 0 10px;
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+    line-height: 1.15;
+  }
+
+  .hist-body p {
+    max-width: 60ch;
+    color: #2b2b2b;
+  }
+
+  /* ---------- layar kecil ---------- */
+
+  @media (max-width: 760px) {
+    .apage-who {
+      grid-template-columns: 1fr;
+    }
+    .facts {
+      grid-template-columns: 1fr;
+    }
+    .hist-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }

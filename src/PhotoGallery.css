@@ -1,0 +1,122 @@
+/* Gallery parallax: hover 3D (falloff cosine) mengikuti posisi pointer.
+   Variabel dari React:
+   --p     : index foto yang di-hover (mulai 1)
+   --z     : zona (1..--max-z) di dalam foto itu
+   --max-p : jumlah foto
+   --i     : index tiap foto (mulai 0) */
+
+.pgal-section {
+  background: #fff;
+  color: #000;
+  padding: clamp(70px, 9vw, 130px) 5vw;
+  overflow: hidden;
+}
+
+.pgal-wrap {
+  position: relative;
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+.pgal {
+  --max-z: 9;
+  --hover-intensity: 160px;
+  --hover-smoothness: 70ms;
+  --fall-smoothness: 250ms;
+  --perspective: 1600px;
+  --dir: 0deg;
+
+  /* posisi pointer di seluruh galeri, dinormalisasi 0..1 */
+  --r: calc(var(--max-z) * (var(--p) - 1) + var(--z));
+  --r-n: calc((var(--r) - 1) / (var(--max-z) * var(--max-p) - 1));
+
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: clamp(300px, 42vw, 520px);
+  margin: 0 auto;
+
+  perspective: var(--perspective);
+  transform-style: preserve-3d;
+
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pgal-item {
+  --w: 0.4;
+  --p-n: calc(var(--i) / (var(--max-p) - 1));
+  --diff: calc(var(--p-n) - var(--r-n));
+  --u: calc(abs(var(--diff)) / var(--w));
+  --falloff: clamp(calc(0.5 * (1 + cos(min(var(--u), 1) * 180deg))), 0, 1);
+  --tilt: calc(clamp(-1, var(--diff) * 5, 1) * var(--falloff) * 70deg);
+
+  --ts: calc(
+    var(--hover-smoothness) * var(--falloff) +
+      var(--fall-smoothness) * (1 - var(--falloff))
+  );
+  --fs: calc(0.1s * var(--falloff, 0) + 0.8s * (1 - var(--falloff, 0)));
+
+  flex: 1;
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transform-style: preserve-3d;
+
+  transform: translateZ(calc(var(--falloff) * var(--hover-intensity)))
+    rotateY(calc(var(--tilt) * cos(var(--dir))))
+    rotateX(calc(var(--tilt) * sin(var(--dir))));
+
+  filter: brightness(max(0.55, var(--falloff, 0) * 1.2))
+    saturate(var(--falloff, 0));
+
+  transition: filter var(--fs), transform var(--ts, var(--fall-smoothness)),
+    flex 0.3s;
+}
+
+/* klik / tahan: foto yang ditekan melebar */
+.pgal.pressed .pgal-item.hot { flex: 3; }
+
+.pgal-img {
+  width: 100%;
+  height: 100%;
+  margin-inline: 5px;
+  background-image: var(--img);
+  background-color: #d4d4d8;
+  background-size: cover;
+  background-position: center;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  -webkit-user-drag: none;
+}
+
+/* Judul di tengah galeri */
+.pgal-title {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  pointer-events: none; /* supaya hover/klik foto tetap jalan */
+
+  color: #fff;
+  font-size: clamp(36px, 4.6vw, 80px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 600px) {
+  .pgal {
+    --hover-intensity: 90px;
+    --perspective: 900px;
+  }
+  .pgal-img { margin-inline: 3px; }
+}

@@ -1,0 +1,301 @@
+/* ===== TEMA HIJAU GELAP =====
+   Dimuat paling akhir (lihat import di App.jsx), jadi menimpa warna di css lain.
+   Tekstur: cahaya hijau lembut di pojok + grain halus + gradasi dasar. Tanpa garis.
+   Mau lebih gelap / terang? Ubah --g-1 dan --g-2. */
+:root {
+  --g-1: #021a0f; /* paling gelap */
+  --g-2: #053823; /* sedikit lebih terang */
+  --g-acc: #3ddc84; /* hijau terang untuk aksen/teks kecil di atas hijau gelap */
+
+  /* cahaya ada di tengah section, tepi atas & bawah selalu --g-1 polos,
+     jadi dua section hijau yang berdampingan menyambung tanpa garis */
+  --g-glow: radial-gradient(ellipse 50% 40% at 85% 35%, rgba(61, 220, 132, 0.22), transparent 70%),
+    radial-gradient(ellipse 45% 38% at 10% 72%, rgba(0, 140, 70, 0.3), transparent 70%);
+  --g-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --g-tex: var(--g-glow), var(--g-grain), linear-gradient(180deg, var(--g-1) 0%, var(--g-2) 50%, var(--g-1) 100%);
+  --g-nav: var(--g-grain), linear-gradient(90deg, #011509, #043020);
+
+  --fade: clamp(72px, 10vw, 140px); /* tinggi gradasi antar section */
+}
+
+/* ---------- NAVBAR ---------- */
+.nav {
+  background-color: var(--g-1);
+  background-image: var(--g-nav);
+  color: #fff;
+  border-bottom: 1px solid rgba(61, 220, 132, 0.3);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+.nav-logo img { filter: none; } /* logo aslinya putih */
+.nav nav a:hover { color: var(--g-acc); }
+.nav .nav-cta { background: var(--g-acc); color: var(--g-1); }
+.nav .nav-cta:hover { background: #fff; color: var(--g-1); }
+
+/* ---------- NEWS: latar hijau, teks putih (About dan Galeri tetap putih) ---------- */
+.news {
+  position: relative;
+  background-color: var(--g-1);
+  background-image: var(--g-tex);
+  color: #fff;
+}
+.sections .news .eyebrow,
+.sections .apage-hero .eyebrow { color: var(--g-acc); }
+.sections .news .heading em,
+.sections .apage-hero .heading em { color: var(--g-acc); -webkit-text-stroke-color: var(--g-acc); }
+
+.news .btn { background: #fff; color: var(--g-1) !important; }
+.news .btn:hover { background: var(--g-acc); color: var(--g-1) !important; }
+
+.news { border-top-color: transparent; }
+.sections .news a.card { color: #fff; }
+.news .card:hover h3 { color: var(--g-acc); }
+.news .card p { color: rgba(255, 255, 255, 0.82); }
+.news .meta,
+.news .empty { color: rgba(255, 255, 255, 0.7); }
+.news .card .more { color: #fff; }
+.news .more { border-bottom-color: var(--g-acc); }
+.news .more:hover { background: var(--g-acc); color: var(--g-1); }
+.news .search input { color: #fff; border-bottom-color: rgba(255, 255, 255, 0.7); }
+.news .search input::placeholder { color: rgba(255, 255, 255, 0.55); }
+.news .search input:focus { border-bottom-color: var(--g-acc); }
+
+/* ---------- FOOTER ---------- */
+.footer {
+  background: #000;
+  color: #fff;
+}
+.footer-top { border-bottom-color: rgba(255, 255, 255, 0.2); }
+.footer-links a:hover { color: var(--g-acc); }
+.footer-meta { color: rgba(255, 255, 255, 0.68); }
+.big-word { color: rgba(255, 255, 255, 0.94); }
+
+/* =====================================================================
+   GRADASI ANTAR SECTION (biar perubahan warna tidak langsung terpotong)
+   Urutan: foto -> About (hijau) -> Galeri (putih) -> Slider (hitam) ->
+   News (hijau) -> Cars (putih) -> Podium (hitam) -> Hall of Fame (hitam) ->
+   Sponsors (putih) -> Footer (hijau).
+   Tiap gradasi menempati ruang padding kosong di tepi section, jadi tidak
+   menutupi isinya. Tinggi: --fade. Kecil/besarkan di :root kalau mau.
+   ===================================================================== */
+.pgal-section,
+.legacy,
+.hof,
+.sponsors { position: relative; }
+
+/* galeri: putih, menyambung dengan About (putih) di atasnya */
+.pgal-section { border-top: 0; }
+
+/* hapus semua garis pemisah antar section */
+.fsj,
+.news,
+.cars,
+.legacy,
+.podium,
+.footer,
+.apage-who,
+.apage-history { border-top: 0; }
+
+.news::before,
+.news::after,
+.pgal-section::after,
+.legacy::after,
+.hof::after,
+.sponsors::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--fade);
+  pointer-events: none;
+}
+
+/* hijau -> putih (News ke Cars). About ke Galeri sama-sama hijau, tidak perlu gradasi. */
+.news::after {
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+}
+
+/* hitam -> hijau (Slider ke News) */
+.news::before {
+  top: 0;
+  background: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0));
+}
+
+/* putih -> hitam (Galeri ke Slider, Cars ke Podium) */
+.pgal-section::after,
+.legacy::after {
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
+}
+
+/* hitam -> putih (Hall of Fame ke Sponsors) */
+.hof::after {
+  bottom: 0;
+  height: clamp(48px, 8vw, 104px); /* sama dengan padding bawah .hof */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+}
+
+/* putih -> hitam (Sponsors ke Footer) */
+.sponsors::after {
+  bottom: 0;
+  height: clamp(70px, 8vw, 100px);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
+}
+
+/* ---------- HALAMAN ABOUT: pembuka hijau lebar penuh, memudar ke putih ---------- */
+.apage { padding-top: 0; overflow-x: clip; }
+.apage-hero {
+  position: relative;
+  isolation: isolate;
+  padding-top: calc(96px + clamp(48px, 7vw, 110px));
+  color: #fff;
+}
+.apage-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0 -100vmax;
+  z-index: -1;
+  background-color: var(--g-1);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) calc(100% - 48px), #fff), var(--g-tex);
+}
+
+/* ---------- SHOP ---------- */
+.shop-nav {
+  background-color: var(--g-1);
+  background-image: var(--g-nav);
+  color: #fff;
+  border-bottom: 1px solid rgba(61, 220, 132, 0.3);
+}
+.shop-logo { color: #fff; }
+.shop-nav nav a { color: #fff; }
+.shop-nav nav a:hover,
+.shop-nav nav a[aria-current] { color: var(--g-acc); }
+.shop-cartbtn { background: var(--g-acc); color: var(--g-1); }
+.shop-cartbtn:hover { background: #fff; color: var(--g-1); }
+
+.shop-hero {
+  max-width: none;
+  padding-bottom: clamp(64px, 8vw, 110px);
+  background-color: var(--g-1);
+  /* bawah hero memudar ke hitam, tempat produk */
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) calc(100% - 90px), #000), var(--g-tex);
+  padding-inline: max(clamp(20px, 5vw, 40px), calc((100% - 1200px) / 2 + clamp(20px, 5vw, 40px)));
+}
+.shop-sizes button.on { color: var(--g-1); background: var(--g-acc); border-color: var(--g-acc); }
+.shop-check { background: var(--g-acc); color: var(--g-1); }
+
+/* ---------- THE MACHINES (.cars + .legacy): latar hijau seperti News ---------- */
+.cars,
+.legacy {
+  position: relative;
+  background-color: var(--g-1);
+  background-image: var(--g-tex);
+  color: #fff;
+  /* balik warna dasar section putih -> hijau; semua garis, teks redup, dan border ikut berubah */
+  --ink: #fff;
+  --muted: rgba(255, 255, 255, 0.7);
+  --line: rgba(255, 255, 255, 0.2);
+}
+
+.sections .cars .eyebrow,
+.sections .legacy .eyebrow { color: var(--g-acc); }
+.sections .cars .heading em,
+.sections .legacy .heading em { color: var(--g-acc); -webkit-text-stroke-color: var(--g-acc); }
+
+.cars .car-info > p,
+.cars .lead { color: rgba(255, 255, 255, 0.82); }
+.legacy .stall p { color: rgba(255, 255, 255, 0.82); }
+.legacy .stall-head span { color: var(--g-acc); }
+
+/* tag kuning: teks tetap gelap */
+.cars .tag,
+.legacy .tag { color: #0b0b0b; }
+
+/* tombol & link */
+.cars .btn { background: #fff; color: var(--g-1) !important; }
+.cars .btn:hover { background: var(--g-acc); color: var(--g-1) !important; }
+.cars .more,
+.legacy .more { border-bottom-color: var(--g-acc); }
+.cars .more:hover,
+.legacy .more:hover { background: var(--g-acc); color: var(--g-1); }
+
+/* News dan Cars sekarang sama-sama hijau, jadi gradasi hijau -> putih di bawah News dihapus
+   supaya menyambung tanpa garis. Bawah .legacy tetap memudar ke hitam (menuju Podium),
+   aturan .legacy::after yang lama sudah mengurusnya. */
+.news::after { display: none; }
+
+/* =====================================================================
+   PENYATUAN SEMUA SECTION: tidak ada tepi tajam lagi
+   ===================================================================== */
+:root { --fade-g: clamp(48px, 6vw, 90px); } /* tinggi pudar hijau ke hijau */
+
+/* ---------- hijau ke hijau (News -> Cars -> Mark 1.0-4.0) ----------
+   Tepi bawah dan atas dipudarkan ke hijau dasar polos, jadi dua section menyambung mulus */
+.news::after,
+.cars::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--fade-g);
+  background: linear-gradient(to bottom, rgba(2, 26, 15, 0), var(--g-1));
+  pointer-events: none;
+}
+.cars::before,
+.legacy::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--fade-g);
+  background: linear-gradient(to bottom, var(--g-1), rgba(2, 26, 15, 0));
+  pointer-events: none;
+}
+/* ruang kosong di bawah Cars supaya pudarnya tidak menutupi isi */
+.cars { padding-bottom: var(--fade-g); }
+.cars .car-feature:last-child { margin-bottom: 0; }
+
+/* ---------- Galeri (putih) -> Slider foto: atas dan bawah slide memudar dari/ke hitam ---------- */
+.fsj-slide::after {
+  background:
+    linear-gradient(to bottom, #000, rgba(0, 0, 0, 0) var(--fade)),
+    linear-gradient(to top, #000, rgba(0, 0, 0, 0) var(--fade)),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.55) 55%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+/* ---------- Mark 1.0-4.0 (hitam) -> Podium foto -> Hall of Fame ---------- */
+.podium::after {
+  background:
+    linear-gradient(to bottom, #000, rgba(0, 0, 0, 0) var(--fade)),
+    linear-gradient(to top, #070707, rgba(7, 7, 7, 0) var(--fade)),
+    rgba(0, 0, 0, 0.62);
+}
+
+/* ---------- SATU WARNA HIJAU untuk News + Cars + Mark 1.0-4.0 ---------- */
+:root { --g-flat: #043020; } /* mau lebih gelap/terang? ubah ini */
+
+.news,
+.cars,
+.legacy {
+  background-color: var(--g-flat);
+  background-image: var(--g-grain); /* tanpa cahaya & gradasi, jadi tidak ada beda warna antar section */
+}
+
+/* pudar hijau-ke-hijau yang tadi sudah tidak perlu */
+.news::after,
+.cars::before,
+.cars::after,
+.legacy::before { display: none; }
+
+/* ---------- Mark 1.0-4.0 (hijau) -> Podium: satu warna hijau, memudar langsung ke foto ---------- */
+.legacy::after { display: none; } /* hapus pudar hitam di bawah Mark 1.0-4.0 */
+
+.podium::after {
+  background:
+    linear-gradient(to bottom, var(--g-flat), rgba(4, 48, 32, 0) var(--fade)), /* atas: hijau yang sama dengan section di atasnya */
+    linear-gradient(to top, #070707, rgba(7, 7, 7, 0) var(--fade)),            /* bawah: ke Hall of Fame */
+    rgba(0, 0, 0, 0.62);
+}

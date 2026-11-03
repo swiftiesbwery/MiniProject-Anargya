@@ -1,0 +1,1100 @@
+/* Halaman informasi di bawah foto: latar putih, sederhana, mengikuti gaya F1 dan Sapuangin.
+   Warna Anargya: hijau, kuning, hitam, putih. */
+
+.sections {
+  --ink: #0b0b0b;
+  --muted: #5d5d5d;
+  --line: #e3e3e0;
+  --yellow: #ffd23f;
+  --body: 'Montserrat', system-ui, sans-serif;
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.sections *,
+.sections *::before,
+.sections *::after {
+  box-sizing: border-box;
+}
+
+/* Default semua judul (sub judul, judul berita, dll): Montserrat Bold. */
+.sections h2,
+.sections h3 {
+  margin: 0;
+  font-family: var(--body);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* JUDUL PAGE saja: Codec Cold ExtraBold.
+   Jangan beri letter-spacing (ligature font). */
+.sections .heading h2,
+.sections .fsj-text h2,
+.sections .podium-text h2,
+.sections .hof-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+}
+
+.sections p {
+  margin: 0;
+}
+
+.sections a {
+  color: inherit;
+}
+
+.wrap {
+  width: min(1240px, 100% - clamp(32px, 8vw, 112px));
+  margin-inline: auto;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* ---------- muncul perlahan saat discroll (berulang) ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s var(--ease-out);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- navigasi (muncul setelah halaman langit) ---------- */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px clamp(16px, 4vw, 56px);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  transform: translateY(-101%);
+  transition: transform 0.45s var(--ease-out);
+}
+
+.nav.show {
+  transform: none;
+}
+
+/* logo putih, jadi dibuat hitam di latar putih */
+.nav-logo img {
+  display: block;
+  width: 58px;
+  height: auto;
+  filter: invert(1);
+}
+
+.nav nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 36px);
+  font-family: var(--body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nav nav a {
+  text-decoration: none;
+}
+
+.nav nav a:hover {
+  color: var(--green);
+}
+
+.nav .nav-cta {
+  padding: 9px 20px;
+  background: var(--ink);
+  color: #fff;
+}
+
+.nav .nav-cta:hover {
+  background: var(--green);
+  color: var(--ink);
+}
+
+/* ---------- judul bagian ---------- */
+
+.heading {
+  margin-bottom: clamp(28px, 4vw, 52px);
+}
+
+/* garis hijau + tulisan kecil, seperti di situs resmi Anargya */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #0a9a41;
+}
+
+.heading h2 {
+  font-size: clamp(2rem, 4.8vw, 4.2rem);
+}
+
+.heading em {
+  font-style: normal;
+  color: #0a9a41;
+}
+
+/* ---------- umum ---------- */
+
+.photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  background: #ececea;
+}
+
+.photo-fallback {
+  display: grid;
+  place-items: center;
+  background: #111;
+}
+
+.photo-fallback img {
+  width: 24%;
+  height: auto;
+  opacity: 0.7;
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.more {
+  font-family: var(--body);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 2px solid var(--green);
+  padding-bottom: 2px;
+}
+
+.more:hover {
+  background: var(--green);
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 48px;
+  padding: 15px 30px;
+  background: var(--ink);
+  color: #fff !important;
+  font-family: var(--body);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    opacity 0.7s ease,
+    transform 0.7s var(--ease-out);
+}
+
+.btn:hover {
+  background: var(--green);
+  color: var(--ink) !important;
+}
+
+/* ---------- ABOUT ---------- */
+
+.about {
+  --sq: clamp(10px, 1.5vw, 18px); /* ukuran satu kotak. Makin besar angkanya, makin besar kotaknya */
+  position: relative;
+  padding: clamp(72px, 10vw, 140px) 0;
+}
+
+/* garis finish kotak-kotak hitam putih di perbatasan foto dan halaman putih */
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--sq) * 2); /* 2 baris kotak */
+  background: conic-gradient(#0b0b0b 25%, #fff 0 50%, #0b0b0b 0 75%, #fff 0) 0 0 / calc(var(--sq) * 2) calc(var(--sq) * 2);
+  pointer-events: none;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+}
+
+.lead {
+  max-width: 58ch;
+  margin-bottom: 16px;
+  color: #2b2b2b;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 44px;
+}
+
+.stat {
+  padding-top: 16px;
+  border-top: 2px solid var(--ink);
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--body);
+  font-weight: 900;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  line-height: 1;
+}
+
+.stat span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.about-fig {
+  margin: 0;
+}
+
+.about-fig .photo {
+  aspect-ratio: 4 / 3;
+}
+
+.about-fig figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ---------- SLIDER: Formula Student Japan, GIIAS, PLN-ICE ---------- */
+
+.fsj {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  border-top: 1px solid var(--line);
+}
+
+/* semua slide berjajar ke samping, track-nya yang bergeser */
+.fsj-track {
+  display: flex;
+  transition: transform 0.9s var(--ease-door);
+}
+
+.fsj-slide {
+  position: relative;
+  flex: 0 0 100%;
+  display: flex;
+  align-items: flex-end;
+  min-height: clamp(420px, 52vw, 720px);
+  padding: clamp(40px, 6vw, 80px) 0 clamp(72px, 8vw, 110px);
+  overflow: hidden;
+}
+
+/* foto hitam putih */
+.fsj-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+}
+
+/* lapisan gelap supaya teks putih terbaca, makin gelap ke bawah */
+.fsj-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.55) 55%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+
+.fsj-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.fsj-text {
+  max-width: 62ch;
+}
+
+.fsj .fsj-text h2 {
+  margin-bottom: 20px;
+  font-size: clamp(2.2rem, 5.5vw, 4.6rem);
+}
+
+.fsj-text p {
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  line-height: 1.6;
+}
+
+.fsj-logos {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+}
+
+.fsj-logos img {
+  display: block;
+  height: clamp(48px, 7vw, 90px);
+  width: auto;
+}
+
+/* titik penanda slide */
+.fsj-dots {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: clamp(20px, 3vw, 36px);
+  display: flex;
+  gap: 10px;
+  transform: translateX(-50%);
+}
+
+.fsj-dots button {
+  width: 34px;
+  height: 4px;
+  padding: 0;
+  border: 0;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.fsj-dots button.on {
+  background: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fsj-track {
+    transition: none;
+  }
+}
+
+/* ---------- NEWS ---------- */
+
+.news {
+  padding: clamp(72px, 10vw, 140px) 0;
+  border-top: 1px solid var(--line);
+}
+
+.news-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px 40px;
+}
+
+.news-head .heading {
+  margin-bottom: 0;
+}
+
+.search input {
+  width: min(340px, 100%);
+  padding: 12px 2px;
+  background: transparent;
+  color: var(--ink);
+  border: 0;
+  border-bottom: 2px solid var(--ink);
+  border-radius: 0;
+  font: inherit;
+  font-family: var(--body);
+}
+
+.search input::placeholder {
+  color: #8a8a8a;
+}
+
+.search input:focus {
+  outline: 0;
+  border-bottom-color: var(--green);
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 3.4vw, 48px) clamp(20px, 3vw, 36px);
+  margin-top: clamp(32px, 4vw, 52px);
+}
+
+.empty {
+  margin-top: 48px;
+  color: var(--muted);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.sections a.card {
+  color: var(--ink);
+}
+
+.card .photo {
+  transition: transform 0.5s var(--ease-out);
+}
+
+.card .thumb {
+  overflow: hidden;
+}
+
+.card:hover .photo {
+  transform: scale(1.04);
+}
+
+.card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 18px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* judul berita: Montserrat Bold */
+.card h3 {
+  font-family: var(--body);
+  font-weight: 800;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+
+.card:hover h3 {
+  color: #0a9a41;
+}
+
+.card p {
+  color: #3a3a3a;
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+
+.card .more {
+  align-self: flex-start;
+  margin-top: auto;
+  color: var(--ink);
+}
+
+/* ---------- CARS ---------- */
+
+.cars {
+  padding-top: clamp(72px, 10vw, 140px);
+  border-top: 1px solid var(--line);
+}
+
+.car-feature {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(28px, 5vw, 80px);
+  align-items: start;
+  margin-bottom: clamp(64px, 9vw, 120px);
+}
+
+.car-feature.flip .car-photos {
+  order: 2;
+}
+
+.thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.thumbs .photo {
+  aspect-ratio: 16 / 10;
+}
+
+/* nama mobil: sub judul, Montserrat Bold */
+.car-info h3 {
+  margin: 14px 0 18px;
+  font-family: var(--body);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.car-info > p {
+  max-width: 54ch;
+  color: #2b2b2b;
+}
+
+.specs {
+  margin: 28px 0;
+  border-top: 2px solid var(--ink);
+}
+
+.specs div {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.specs dt {
+  flex: none;
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.specs dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+}
+
+.highlights {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.highlights li {
+  font-weight: 600;
+}
+
+/* Mark 1.0 - 4.0 */
+.legacy {
+  padding: clamp(56px, 8vw, 110px) 0 clamp(72px, 10vw, 140px);
+  border-top: 1px solid var(--line);
+}
+
+.legacy-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.stall {
+  padding-top: 16px;
+  border-top: 2px solid var(--ink);
+}
+
+.stall-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.stall-head h3 {
+  font-family: var(--body);
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.stall-head span {
+  color: #0a9a41;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.stall p {
+  color: #3a3a3a;
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+
+/* ---------- HALL OF FAME ---------- */
+
+/* --- hero "Podium Finishers" --- */
+
+.podium {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 3vw, 40px);
+  min-height: clamp(520px, 46vw, 840px);
+  padding: clamp(48px, 7vw, 100px) clamp(16px, 4vw, 56px);
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  border-top: 1px solid var(--line);
+}
+
+.podium-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+}
+
+.podium::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.podium-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 3vw, 48px);
+  width: 100%;
+}
+
+.podium-laurel {
+  flex: none;
+  height: clamp(220px, 34vw, 500px);
+  width: auto;
+  color: #fff;
+}
+
+.podium-laurel.r {
+  transform: scaleX(-1);
+}
+
+.podium-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.podium-eyebrow {
+  padding-left: 0.55em;
+  font-size: clamp(0.7rem, 1.7vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+}
+
+.podium .podium-text h2 {
+  margin: clamp(10px, 1.6vw, 24px) 0;
+  font-size: clamp(2.6rem, 11vw, 10rem);
+  line-height: 0.92;
+}
+
+.podium-cta {
+  position: relative;
+  z-index: 1;
+  padding: 16px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-family: var(--body);
+  font-size: clamp(0.85rem, 1.3vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.podium-cta:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* --- daftar lencana --- */
+
+.hof {
+  --ac: #19a574;
+  --ivory: #ece7da;
+  --ash: #8c8b86;
+  position: relative;
+  isolation: isolate;
+  padding: clamp(48px, 7vw, 104px) clamp(16px, 3vw, 40px);
+  background: #070707;
+  color: var(--ivory);
+  text-align: center;
+}
+
+/* foto hitam putih yang memudar di bagian atas */
+.hof::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: clamp(320px, 36vw, 540px);
+  background: url('./assets/hof-bg.jpg') center 30% / cover no-repeat;
+  filter: grayscale(1) brightness(0.6) contrast(1.05);
+  -webkit-mask-image: linear-gradient(transparent 0, #000 30%, #000 45%, transparent 100%);
+  mask-image: linear-gradient(transparent 0, #000 30%, #000 45%, transparent 100%);
+  pointer-events: none;
+}
+
+.sections .hof-title {
+  --c: 22px;
+  display: block;
+  width: fit-content;
+  margin: 0 auto clamp(24px, 4vw, 56px);
+  padding: 14px clamp(28px, 6vw, 80px);
+  background: var(--ac);
+  color: #fff;
+  font-size: clamp(2rem, 5.5vw, 4.4rem);
+  line-height: 1.05;
+  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
+}
+
+.hof-sub {
+  max-width: 34em;
+  margin: 0 auto clamp(28px, 5vw, 64px);
+  color: #d6d3c8;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.6);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(10px, 2vw, 28px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.badge {
+  container-type: inline-size;
+  position: relative;
+  width: clamp(150px, calc(25% - 24px), 270px);
+  aspect-ratio: 1;
+  color: #cfcab9;
+}
+
+.badge.hl {
+  color: #2fd36b;
+}
+
+.wreath {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 7px rgba(236, 231, 218, 0.28));
+  transition:
+    filter 0.4s ease,
+    transform 0.4s ease;
+}
+
+.badge:hover .wreath {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 14px rgba(236, 231, 218, 0.5));
+}
+
+.badge.hl .wreath {
+  filter: drop-shadow(0 0 9px rgba(47, 211, 107, 0.4));
+}
+
+.badge-txt {
+  position: absolute;
+  inset: 16% 21%;
+  display: grid;
+  grid-template-rows: 15cqw 17cqw 5.5cqw;
+  row-gap: 2cqw;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  color: var(--ivory);
+}
+
+.badge-txt b {
+  font-family: var(--body);
+  font-weight: 900;
+  font-size: 15cqw;
+  line-height: 1;
+}
+
+.badge-txt b.w {
+  font-size: 10.5cqw;
+}
+
+.badge.hl .badge-txt b {
+  color: #2fd36b;
+}
+
+.badge-txt strong {
+  font-family: var(--body);
+  font-weight: 800;
+  font-size: 4.6cqw;
+  line-height: 1.18;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.badge-txt em {
+  font-family: var(--body);
+  font-size: 4.2cqw;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--ash);
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .badge {
+    width: min(78vw, 320px);
+  }
+  .podium-eyebrow {
+    letter-spacing: 0.3em;
+    padding-left: 0.3em;
+  }
+  .podium-laurel {
+    height: clamp(140px, 40vw, 220px);
+  }
+}
+
+/* ---------- FOOTER ---------- */
+
+.footer {
+  padding: clamp(56px, 8vw, 110px) 0 0;
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 32px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--line);
+}
+
+.footer-tag {
+  font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #0a9a41;
+}
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 40px;
+  padding-top: 24px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.footer-meta span:last-child {
+  max-width: 38ch;
+  text-align: right;
+}
+
+/* tulisan ANARGYA raksasa: judul page, Codec Cold ExtraBold.
+   Jangan beri letter-spacing (ligature font). */
+.big-word {
+  margin-top: clamp(24px, 4vw, 56px);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 17.6vw;
+  line-height: 0.82;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: translateY(8%);
+}
+
+.big-word .slant {
+  color: var(--green);
+}
+
+/* ---------- layar kecil ---------- */
+
+@media (max-width: 960px) {
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .legacy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .about-grid,
+  .car-feature {
+    grid-template-columns: 1fr;
+  }
+  .car-feature.flip .car-photos {
+    order: 0;
+  }
+  .news-grid,
+  .legacy-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-meta span:last-child {
+    text-align: left;
+  }
+  .nav-logo img {
+    width: 46px;
+  }
+  .nav nav {
+    gap: 12px;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+  .nav .nav-cta {
+    padding: 7px 12px;
+  }
+}
+
+/* =====================================================================
+   SEMUA JUDUL SUPER BOLD (taruh paling bawah supaya menimpa aturan di atas)
+   - JUDUL page (About, News, Cars, Podium, Hall of Fame, slider) dan tulisan
+     ANARGYA raksasa di footer: Codec Cold (--font-display), super bold.
+     Kalau fontnya tidak termuat, otomatis jatuh ke Montserrat Black 900.
+   - SUB JUDUL (judul berita, nama mobil, Mark 1.0-4.0): tetap Montserrat, bold.
+   - Tebal ekstra: --title-stroke (judul) dan --title-stroke-sm (sub judul).
+     Makin besar makin tebal (0 = tanpa tambahan).
+   ===================================================================== */
+
+.sections {
+  --title-font: var(--font-display, 'Montserrat');
+  --title-stroke: 0.04em; /* judul besar */
+  --title-stroke-sm: 0.022em; /* sub judul kecil */
+}
+
+.sections h2,
+.sections .heading h2,
+.sections .fsj-text h2,
+.sections .podium-text h2,
+.sections .hof-title,
+.sections .big-word {
+  font-family: var(--title-font), 'Montserrat', system-ui, sans-serif;
+  font-weight: 900;
+  -webkit-text-stroke: var(--title-stroke) currentColor;
+}
+
+/* sub judul (judul berita, nama mobil, Mark 1.0-4.0): tetap Montserrat, dibuat bold */
+.sections h3,
+.sections .card h3,
+.sections .car-info h3,
+.sections .stall-head h3 {
+  font-family: var(--body);
+  font-weight: 800;
+  -webkit-text-stroke: var(--title-stroke-sm) currentColor;
+}
+
+/* kata berwarna di dalam judul: garis tebalnya ikut warna katanya */
+.sections .heading em {
+  -webkit-text-stroke-color: #0a9a41;
+}
+
+.sections .big-word .slant {
+  -webkit-text-stroke-color: var(--green);
+}

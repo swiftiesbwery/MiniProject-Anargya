@@ -1,0 +1,76 @@
+/* ===== TEMA: dark green #006400 + putih + hitam =====
+   File ini dimuat PALING AKHIR (lihat import di App.jsx), jadi menimpa warna di file css lain.
+   Mau ganti warna utama? Cukup ubah --brand di bawah. */
+:root {
+  --brand: #006400;        /* dark green utama */
+  --brand-hover: #008a00;  /* saat di-hover */
+  --brand-soft: #9af0b8;   /* hijau muda untuk teks di atas latar hijau/hitam */
+}
+
+/* ---------- NAVBAR web utama: hijau tua, teks putih ---------- */
+header.nav,
+header.nav.show {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+header.nav .nav-logo img { filter: brightness(0) invert(1); } /* logo jadi putih */
+header.nav nav a { color: #fff; }
+header.nav nav a:hover { color: var(--brand-soft); }
+header.nav nav a.nav-cta {
+  color: var(--brand);
+  background: #fff;
+}
+header.nav nav a.nav-cta:hover { color: #fff; background: #000; }
+
+/* ---------- tombol ---------- */
+.btn {
+  color: #fff;
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.btn:hover { background: var(--brand-hover); border-color: var(--brand-hover); color: #fff; }
+
+/* ---------- footer: hijau tua ---------- */
+.footer {
+  background: var(--brand);
+  color: #fff;
+}
+.footer a { color: #fff; }
+.footer a:hover { color: var(--brand-soft); }
+.footer-meta { color: rgba(255, 255, 255, 0.75); }
+
+/* ---------- Sponsors (latar tetap putih, aksen hijau) ---------- */
+.sponsors { border-top: 8px solid var(--brand); }
+.sponsors-title { color: var(--brand); }
+.sponsors-sub { color: #444; }
+.sponsor-tier { border-top-color: #cfe3cf; }
+
+/* ---------- Galeri (latar tetap putih) ---------- */
+.pgal-section { border-top: 8px solid var(--brand); }
+
+/* ---------- SHOP ---------- */
+.shop-nav { background: var(--brand); color: #fff; }
+.shop-logo { color: #fff; }
+.shop-logo img { filter: brightness(0) invert(1); }
+.shop-nav nav a { color: #fff; }
+.shop-nav nav a:hover,
+.shop-nav nav a[aria-current] { color: var(--brand-soft); }
+.shop-cartbtn { color: var(--brand); background: #fff; }
+.shop-cartbtn:hover { color: #fff; background: #000; }
+
+.shop-hero {
+  max-width: none;
+  background: linear-gradient(180deg, var(--brand) 0%, #000 100%);
+  padding-inline: max(clamp(20px, 5vw, 40px), calc((100% - 1200px) / 2 + clamp(20px, 5vw, 40px)));
+}
+
+.shop-btn { color: #fff; background: var(--brand); }
+.shop-btn:hover { background: var(--brand-hover); }
+.shop-btn.red { color: #fff; background: #e0262d; }
+.shop-btn.red:hover { background: #f23a41; }
+.shop-card { border-color: rgba(0, 100, 0, 0.6); }
+.shop-sizes button.on { color: #fff; background: var(--brand); border-color: var(--brand); }
+.shop-check { color: #fff; background: var(--brand); }
+.adm-stats b,
+.adm-table th { color: var(--brand-soft); }

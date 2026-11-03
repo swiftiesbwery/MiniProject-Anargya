@@ -1,0 +1,55 @@
+/* Banner menempel pada layar (di dalam .pin), bukan pada langit/foto,
+   jadi posisinya selalu dihitung dari tengah layar. */
+.fsaej {
+  /* Mulai dari bawah layar, naik mengikuti scroll, dan tepat di TENGAH layar
+     saat --fsaej-center-at tercapai. Mau lebih cepat sampai tengah? Kecilkan
+     angka ini (mis. 25vh). Mau lebih lama? Besarkan (mis. 45vh). */
+  --fsaej-center-at: 55vh;
+  /* Banner baru mulai tampak setelah di-scroll: transparan sampai scroll
+     --fsaej-show-from (px), lalu perlahan muncul sampai --fsaej-show-to (px). */
+  --fsaej-show-from: 100;
+  --fsaej-show-to: 320;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 2vh, 22px);
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+  text-shadow: 0 2px 26px rgba(0, 0, 0, 0.45);
+  /* -50% = titik tengah banner pas di tengah layar.
+     var(--s) = jarak scroll (diisi App.jsx). */
+  transform: translate3d(0, calc(-50% + var(--fsaej-center-at) - var(--s, 0) * 1px), 0);
+  opacity: min(1, max(0, calc((var(--s, 0) - var(--fsaej-show-from)) / (var(--fsaej-show-to) - var(--fsaej-show-from)))));
+  will-change: transform, opacity;
+}
+
+.fsaej-kicker {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 3.2vw, 2.6rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Logo dijadikan putih seperti web asli (butuh PNG transparan).
+   Mau tetap berwarna? Hapus "brightness(0) invert(1)" di bawah ini. */
+.fsaej-logo {
+  width: min(52vw, 560px);
+  height: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 16px rgba(0, 0, 0, 0.4));
+}
+
+.fsaej-year {
+  margin: 0;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 9vw, 7.5rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}

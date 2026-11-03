@@ -1,0 +1,59 @@
+.sponsors {
+  background: #fff;
+  color: #000;
+  padding: 100px 5vw 120px;
+  text-align: center;
+}
+
+.sponsors-title {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+  color: #000;
+}
+
+.sponsors-sub {
+  color: #666;
+  margin: 0 0 64px;
+}
+
+.sponsor-tier {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 32px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0;
+  border-top: 1px solid #e6e6e6;
+}
+.sponsor-tier:first-of-type { border-top: 0; }
+
+.sponsor-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sponsor-item img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+.sponsor-item:hover img { transform: scale(1.06); }
+
+/* Makin ke bawah makin kecil */
+.tier-1 .sponsor-item { width: 170px; height: 90px; }
+.tier-2 .sponsor-item { width: 130px; height: 70px; }
+.tier-3 .sponsor-item { width: 100px; height: 56px; }
+
+@media (max-width: 700px) {
+  .sponsors { padding: 64px 20px 80px; }
+  .sponsor-tier { gap: 24px 28px; }
+  .tier-1 .sponsor-item { width: 130px; height: 70px; }
+  .tier-2 .sponsor-item { width: 100px; height: 56px; }
+  .tier-3 .sponsor-item { width: 80px; height: 46px; }
+}

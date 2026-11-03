@@ -1,0 +1,51 @@
+/* Supaya tulisan bisa diposisikan di atas foto */
+.pan > .car-wrap {
+  position: relative;
+}
+
+.tagline {
+  --tagline-top: 50%; /* posisi vertikal di foto: 50% = tepat di tengah */
+  --tagline-speed: 0.35; /* kekuatan parallax: 0 = ikut foto, makin besar makin terasa gerak sendiri */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--tagline-top);
+  z-index: 2;
+  padding: 0 clamp(16px, 5vw, 80px);
+  color: #fff;
+  text-align: center;
+  pointer-events: none;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+  /* -50% = pas di tengah. Mulai agak di bawah, naik lebih cepat dari foto, dan pas di
+     tengah saat foto sudah terlihat penuh (var(--s) = scroll, var(--max) = scroll
+     terjauh; diisi App.jsx) */
+  transform: translate3d(0, calc(-50% + (var(--max, 0) - var(--s, 0)) * var(--tagline-speed) * 1px), 0);
+  will-change: transform;
+}
+
+/* bayangan gelap lembut di belakang tulisan supaya tetap terbaca di atas foto yang ramai */
+.tagline::before {
+  content: '';
+  position: absolute;
+  inset: -60% 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 65%);
+}
+
+.tagline p {
+  max-width: 1100px;
+  margin: 0 auto;
+  font-size: clamp(1.5rem, 3.6vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.tagline strong {
+  font-weight: 800;
+}
+
+.tagline .bar {
+  margin: 0 0.5em;
+  font-weight: 300;
+  opacity: 0.85;
+}
