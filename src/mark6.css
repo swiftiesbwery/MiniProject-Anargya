@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+/* MARK 6.0 section. White background, dark green blob.
+   Uses --g-flat from green.css. All classes are prefixed m6- to avoid clashes. */
+
+.m6 {
+  --m6-green: var(--g-flat, #043020);
+  --m6-accent: var(--g-acc, #3ddc84);
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(64px, 9vw, 120px) clamp(20px, 6vw, 90px) 140px;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--m6-green);
+  background: #fff;
+}
+
+.m6-copy {
+  position: relative;
+  z-index: 3;
+  max-width: 480px;
+}
+.m6-title {
+  margin: 0 0 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(44px, 6vw, 76px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--m6-green);
+}
+.m6-copy p {
+  margin: 0 0 26px;
+  max-width: 420px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(4, 48, 32, 0.78);
+}
+
+.m6-btn {
+  display: inline-flex;
+  align-items: stretch;
+  background: var(--m6-green);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.m6-btn span {
+  width: 46px;
+  display: grid;
+  place-items: center;
+  background: var(--m6-accent);
+  color: var(--m6-green);
+  font-weight: 700;
+}
+.m6-btn b {
+  padding: 11px 22px;
+  font-weight: 600;
+}
+.m6-btn:hover { background: #0a4a30; }
+
+/* stage: blob + car */
+.m6-stage {
+  position: absolute;
+  right: 6vw;
+  top: 50%;
+  width: min(46vw, 640px);
+  aspect-ratio: 1 / 1;
+  margin-top: calc(min(46vw, 640px) / -2 - 3vh);
+  z-index: 1;
+}
+.m6-blob {
+  position: absolute;
+  inset: 6% 0 0 8%;
+  background: var(--m6-green);
+  border-radius: 58% 42% 55% 45% / 50% 55% 45% 50%;
+  animation: m6-morph 9s ease-in-out infinite alternate;
+}
+.m6-car {
+  position: absolute;
+  left: -18%;
+  width: 140%;
+  max-width: none;
+  top: 20%;
+  height: auto;
+  filter: drop-shadow(0 30px 30px rgba(0, 20, 10, 0.45));
+  animation: m6-float 4.5s ease-in-out infinite;
+}
+@keyframes m6-morph {
+  to {
+    border-radius: 44% 56% 42% 58% / 58% 42% 56% 44%;
+    transform: rotate(6deg) scale(1.03);
+  }
+}
+@keyframes m6-float {
+  0%, 100% { transform: translateY(0) rotate(-1.2deg); }
+  50% { transform: translateY(-22px) rotate(1.2deg); }
+}
+
+/* bottom three menu tiles */
+.m6-dock {
+  position: absolute;
+  z-index: 3;
+  left: clamp(20px, 6vw, 90px);
+  bottom: 40px;
+  display: flex;
+}
+.m6-dock a {
+  width: 150px;
+  height: 96px;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 4px;
+  text-align: center;
+  color: var(--m6-green);
+  text-decoration: none;
+  background: rgba(4, 48, 32, 0.06);
+  transition: transform 0.25s, background 0.25s, color 0.25s;
+}
+.m6-dock a:hover,
+.m6-dock a:focus-visible {
+  transform: scale(1.18);
+  background: var(--m6-green);
+  color: #fff;
+}
+.m6-dock a:focus-visible { outline: 2px solid var(--m6-accent); outline-offset: 2px; }
+.m6-dock svg { width: 28px; height: 28px; fill: currentColor; }
+.m6-dock strong { font-size: 12px; font-weight: 700; }
+.m6-dock small { font-size: 9px; font-weight: 500; opacity: 0.7; }
+
+@media (max-width: 860px) {
+  .m6 { justify-content: flex-start; padding-bottom: 48px; }
+  .m6-stage {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin: 24px auto 0;
+    width: 92%;
+  }
+  .m6-dock {
+    position: static;
+    margin-top: 18px;
+    justify-content: space-between;
+  }
+  .m6-dock a { width: 31%; height: 88px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m6-blob, .m6-car { animation: none; }
+  .m6-dock a { transition: none; }
+}

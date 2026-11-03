@@ -299,3 +299,70 @@
     linear-gradient(to top, #070707, rgba(7, 7, 7, 0) var(--fade)),            /* bawah: ke Hall of Fame */
     rgba(0, 0, 0, 0.62);
 }
+
+/* ---------- HALL OF FAME (lencana): latar putih, krem -> hitam ---------- */
+.hof {
+  background: #fff;
+  color: #0b0b0b;
+  --ivory: #0b0b0b; /* teks utama di dalam lencana (dulu krem) */
+  --ash: #5d5d5d;   /* teks kecil miring (tahun lomba) */
+}
+.hof::before { display: none; } /* foto latar yang memudar tidak dipakai lagi */
+.hof::after  { display: none; } /* pudar putih ke Sponsors tidak perlu, sama-sama putih */
+
+.hof-sub { color: #3a3a3a; text-shadow: none; }
+
+/* lencana biasa: laurel dan tulisan hitam */
+.badge { color: #0b0b0b; }
+.wreath { filter: none; }
+.badge:hover .wreath { filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18)); }
+
+/* lencana juara 1: tetap hijau */
+.badge.hl { color: #0a9a41; }
+.badge.hl .badge-txt b { color: #0a9a41; }
+.badge.hl .wreath { filter: none; }
+.badge.hl:hover .wreath { filter: drop-shadow(0 4px 10px rgba(10, 154, 65, 0.3)); }
+
+/* Podium (foto) -> Hall of Fame (putih): bawah foto memudar ke putih, bukan ke hitam */
+.podium::after {
+  background:
+    linear-gradient(to bottom, var(--g-flat), rgba(4, 48, 32, 0) var(--fade)),
+    linear-gradient(to top, #fff, rgba(255, 255, 255, 0) var(--fade)),
+    rgba(0, 0, 0, 0.62);
+}
+
+/* hapus tombol "Hall of Fame" di bagian Podium */
+.podium-cta { display: none; }
+
+/* ---------- Galeri jadi section pertama setelah foto, About di bawahnya ---------- */
+
+/* garis finish kotak-kotak pindah dari About ke Galeri */
+.about::before { display: none; }
+.pgal-section {
+  --sq: clamp(10px, 1.5vw, 18px);
+}
+.pgal-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--sq) * 2);
+  background: conic-gradient(#0b0b0b 25%, #fff 0 50%, #0b0b0b 0 75%, #fff 0) 0 0 / calc(var(--sq) * 2) calc(var(--sq) * 2);
+  pointer-events: none;
+}
+
+/* Galeri ke About sama-sama putih: tidak perlu pudar hitam lagi */
+.pgal-section::after { display: none; }
+
+/* About (putih) memudar ke hitam menuju Slider */
+.about::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--fade);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
+  pointer-events: none;
+}

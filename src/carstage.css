@@ -1,0 +1,50 @@
+/* MARK 6.0 di section Cars: mobil melayang di atas blob hijau */
+
+.car-photos.car-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 2.5;
+  overflow: visible;
+}
+
+.car-stage .cs-blob {
+  position: absolute;
+  inset: 4% 6% 2% 10%;
+  background: #fff;
+  border-radius: 58% 42% 55% 45% / 50% 55% 45% 50%;
+  box-shadow: 0 0 90px rgba(255, 255, 255, 0.25);
+  animation: cs-morph 9s ease-in-out infinite alternate;
+}
+
+.car-photos.car-stage .cs-car {
+  position: relative;
+  z-index: 1;
+  width: var(--cs-w, 112%);
+  max-width: none;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 30px rgba(0, 20, 10, 0.55));
+  animation: cs-float 4.5s ease-in-out infinite;
+}
+
+@keyframes cs-morph {
+  to {
+    border-radius: 44% 56% 42% 58% / 58% 42% 56% 44%;
+    transform: rotate(6deg) scale(1.03);
+  }
+}
+@keyframes cs-float {
+  0%, 100% { transform: translateY(0) rotate(-1.2deg); }
+  50% { transform: translateY(-18px) rotate(1.2deg); }
+}
+
+@media (max-width: 860px) {
+  .car-photos.car-stage .cs-car { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .car-stage .cs-blob,
+  .car-photos.car-stage .cs-car { animation: none; }
+}

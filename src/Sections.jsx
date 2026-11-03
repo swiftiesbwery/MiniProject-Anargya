@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import logo from './assets/logo.png'
 import { ABOUT, CARS, HOF, HOF_PHOTO, LEGACY, LINKS, NEWS, SLIDER_INTERVAL, SLIDES, STATS } from './data'
+import mark6 from './assets/mark6.png'
+import mark5 from './assets/mark5.png'
 import './sections.css'
+import './carstage.css'
 import Sponsors from './Sponsors'
 import PhotoGallery from './PhotoGallery'
 
@@ -238,20 +241,34 @@ function News() {
 
 /* ---------- CARS ---------- */
 
+/* Mobil yang tampil sebagai gambar melayang di atas blob (kunci = car.id, w = lebar gambar dalam %) */
+const FLOATING = {
+  mark6: { src: mark6, w: 112 },
+  mark5: { src: mark5, w: 100 },
+}
+
 function CarFeature({ car, flip }) {
   const [main, ...rest] = car.photos
+  const floating = FLOATING[car.id]
   return (
     <article className={`car-feature ${flip ? 'flip' : ''}`}>
-      <div className="car-photos reveal">
-        <Photo className="main-photo" src={main.src} alt={main.alt} />
-        {rest.length > 0 && (
-          <div className="thumbs">
-            {rest.map((p) => (
-              <Photo key={p.src} src={p.src} alt={p.alt} />
-            ))}
-          </div>
-        )}
-      </div>
+      {floating ? (
+        <div className="car-photos car-stage reveal" style={{ '--cs-w': `${floating.w}%` }}>
+          <div className="cs-blob" aria-hidden="true" />
+          <img className="cs-car" src={floating.src} alt={`${car.name} race car`} />
+        </div>
+      ) : (
+        <div className="car-photos reveal">
+          <Photo className="main-photo" src={main.src} alt={main.alt} />
+          {rest.length > 0 && (
+            <div className="thumbs">
+              {rest.map((p) => (
+                <Photo key={p.src} src={p.src} alt={p.alt} />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="car-info reveal">
         <span className="tag">{car.badge}</span>
@@ -454,8 +471,8 @@ export default function Sections() {
   return (
     <div className="sections" ref={root}>
       <NavBar />
-      <About />
       <PhotoGallery />
+      <About />
       <Fsj />
       <News />
       <Cars />

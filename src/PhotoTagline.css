@@ -33,19 +33,9 @@
 }
 
 .tagline p {
-  max-width: 1100px;
+  max-width: 900px;
   margin: 0 auto;
-  font-size: clamp(1.5rem, 3.6vw, 3.4rem);
-  font-weight: 500;
-  line-height: 1.25;
-}
-
-.tagline strong {
-  font-weight: 800;
-}
-
-.tagline .bar {
-  margin: 0 0.5em;
-  font-weight: 300;
-  opacity: 0.85;
+  font-size: clamp(1.15rem, 2.2vw, 2rem); /* mau lebih besar/kecil? ubah angka tengah (2.2vw) */
+  font-weight: 600;
+  line-height: 1.35;
 }
