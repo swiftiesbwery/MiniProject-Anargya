@@ -1,6 +1,8 @@
  
 # Anargya ITS EV Team Website
 
+link live : https://mini-project-anargya-rust.vercel.app/
+
 Website Anargya ITS EV Team merupakan website profil tim yang dilengkapi dengan katalog merchandise dan sistem pemesanan online. Project ini dikembangkan menggunakan React.js dan Vite pada sisi frontend, serta Supabase sebagai backend service dan PostgreSQL sebagai database.
 
 Website ini dirancang untuk menampilkan identitas tim, perjalanan pengembangan mobil Formula Electric, pencapaian kompetisi, berita, dokumentasi, sponsor, dan merchandise Anargya ITS EV Team.
